@@ -74,57 +74,81 @@
                             <strong>30 teams</strong>, with only
                             <strong>2-3 Quality Assurance agents</strong>
                             responsible for auditing and providing feedback for
-                            call volumes in the range of millions per day. A
+                            call volumes in the range of millions per week. A
                             standardized form existed with
                             <strong>pass/fail</strong> categories, where QA
                             would listen to a selection of calls submitted by
                             team leaders and respond via email their findings
                             and follow up with coaching.
                         </p>
+                        <p>The core issues I identified in the process are:</p>
+                        <ul>
+                            <li>Lack of historical data tracking</li>
+                            <li>
+                                Indefinite/nonstandard procedure for selecting
+                                calls
+                            </li>
+                            <li>Low coverage due to small sample</li>
+                        </ul>
                         <p>
-                            The core issues I identified in the process are:
-                            <ul>
-                                <li>Lack of historical data tracking</li>
-                                <li>Indefinite/nonstandard procedure for selecting calls</li>
-                                <li>Low coverage due to small sample</li>
-                            </ul>
-                            In the process of redefining the auditing procedure, I sought to answer these questions for the business:
-                            <ul>
-                                <li>Who are our highest and lowest performers?</li>
-                                <li>What is the impact of quality on our KPI's?</li>
-                                <li>Where are our greatest areas of opportunity?</li>
-                                <li>How is call quality changing over time?</li>
-                            </ul>
+                            In the process of redefining the auditing procedure,
+                            I sought to answer these questions for the business
+                            which were not being addressed by the existing
+                            process:
                         </p>
+                        <ul>
+                            <li>Who are our highest and lowest performers?</li>
+                            <li>What is the impact of quality on our KPI's?</li>
+                            <li>
+                                Where are our greatest areas of opportunity?
+                            </li>
+                            <li>How is call quality changing over time?</li>
+                        </ul>
 
                         <hr class="major" />
 
-                        <h2>Magna etiam veroeros</h2>
+                        <h2>The Solution</h2>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Duis dapibus rutrum facilisis. Class aptent
-                            taciti sociosqu ad litora torquent per conubia
-                            nostra, per inceptos himenaeos. Etiam tristique
-                            libero eu nibh porttitor fermentum. Nullam venenatis
-                            erat id vehicula viverra. Nunc ultrices eros ut
-                            ultricies condimentum. Mauris risus lacus, blandit
-                            sit amet venenatis non, bibendum vitae dolor. Nunc
-                            lorem mauris, fringilla in aliquam at, euismod in
-                            lectus. Pellentesque habitant morbi tristique
-                            senectus et netus et malesuada fames ac turpis
-                            egestas. In non lorem sit amet elit placerat
-                            maximus. Pellentesque aliquam maximus risus, vel sed
-                            vehicula.
+                            The core of the new process was to utilize the tools
+                            available to build out an automation which removed
+                            the heavy manual burden of call selection and
+                            tracking with excel files. In the final iteration,
+                            the stack consisted of:
                         </p>
+                        <ul>
+                            <li>
+                                MySQL: Existing enterprisedata warehouse
+                                containing production and agent information
+                            </li>
+                            <li>
+                                SQLite: Local database for writing sample and
+                                audit data
+                            </li>
+                            <li>
+                                Python: ETL scripts and CLI for orchestration
+                            </li>
+                            <li>
+                                PowerAutomate: Flows to load data into forms
+                            </li>
+                            <li>
+                                PowerApps: Form frontend for audit completion
+                            </li>
+                            <li>PowerBI: Visualization and analysis</li>
+                        </ul>
                         <p>
-                            Interdum et malesuada fames ac ante ipsum primis in
-                            faucibus. Pellentesque venenatis dolor imperdiet
-                            dolor mattis sagittis. Praesent rutrum sem diam,
-                            vitae egestas enim auctor sit amet. Pellentesque leo
-                            mauris, consectetur id ipsum sit amet, fersapien
-                            risus, commodo eget turpis at, elementum convallis
-                            elit. Pellentesque enim turpis, hendrerit tristique
-                            lorem ipsum dolor.
+                            The sample repo differs slightly from this
+                            implementation but the core workflow is the same: on
+                            a weekly basis, a balanced random sample based on
+                            business parameters (2 calls that transferred and 2
+                            calls where the client hung up per agent from the
+                            prior week) was selected, a subset of which was
+                            randomly assigned to the QA agents (5 calls of each
+                            call end type). Both groups, leaders and QA agents,
+                            would then score their assigned calls based on the
+                            existing scorecard categories by a deadline, after
+                            which results were recorded into a local database.
+                            Finally, a view in the audit database was used to
+                            construct visualizations and shared with the group.
                         </p>
 
                         <hr class="major" />
