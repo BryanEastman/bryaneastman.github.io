@@ -43,7 +43,9 @@
                         </header>
 
                         <span class="image main"
-                            ><img src="images/pic11.jpg" alt=""
+                            ><img
+                                src="images/CallAudits/DetroitHeader.jpg"
+                                alt="Detroit City"
                         /></span>
 
                         <p>
@@ -103,6 +105,10 @@
                                 Where are our greatest areas of opportunity?
                             </li>
                             <li>How is call quality changing over time?</li>
+                            <li>
+                                How confident are we in our accuracy of rating
+                                quality?
+                            </li>
                         </ul>
 
                         <hr class="major" />
@@ -117,23 +123,30 @@
                         </p>
                         <ul>
                             <li>
-                                MySQL: Existing enterprisedata warehouse
-                                containing production and agent information
+                                <strong>MySQL</strong>: Existing enterprise data
+                                warehouse containing production and agent
+                                information
                             </li>
                             <li>
-                                SQLite: Local database for writing sample and
-                                audit data
+                                <strong>SQLite</strong>: Local database for
+                                writing sample and audit data
                             </li>
                             <li>
-                                Python: ETL scripts and CLI for orchestration
+                                <strong>Python</strong>: ETL scripts and CLI for
+                                orchestration
                             </li>
                             <li>
-                                PowerAutomate: Flows to load data into forms
+                                <strong>PowerAutomate</strong>: Flows to load
+                                data into forms
                             </li>
                             <li>
-                                PowerApps: Form frontend for audit completion
+                                <strong>PowerApps</strong>: Form frontend for
+                                audit completion
                             </li>
-                            <li>PowerBI: Visualization and analysis</li>
+                            <li>
+                                <strong>PowerBI</strong>: Visualization and
+                                analysis
+                            </li>
                         </ul>
                         <p>
                             The sample repo differs slightly from this
@@ -143,44 +156,29 @@
                             calls where the client hung up per agent from the
                             prior week) was selected, a subset of which was
                             randomly assigned to the QA agents (5 calls of each
-                            call end type). Both groups, leaders and QA agents,
-                            would then score their assigned calls based on the
-                            existing scorecard categories by a deadline, after
-                            which results were recorded into a local database.
-                            Finally, a view in the audit database was used to
-                            construct visualizations and shared with the group.
-                        </p>
-
-                        <hr class="major" />
-
-                        <h2>Lorem aliquam bibendum</h2>
-                        <p>
-                            Donec eget ex magna. Interdum et malesuada fames ac
-                            ante ipsum primis in faucibus. Pellentesque
-                            venenatis dolor imperdiet dolor mattis sagittis.
-                            Praesent rutrum sem diam, vitae egestas enim auctor
-                            sit amet. Pellentesque leo mauris, consectetur id
-                            ipsum sit amet, fergiat. Pellentesque in mi eu massa
-                            lacinia malesuada et a elit. Donec urna ex, lacinia
-                            in purus ac, pretium pulvinar mauris. Curabitur
-                            sapien risus, commodo eget turpis at, elementum
-                            convallis elit. Pellentesque enim turpis, hendrerit.
+                            call end type for each leader). Both groups, leaders
+                            and QA agents, would then score their assigned calls
+                            based on the existing scorecard categories by a
+                            deadline, after which results were recorded into a
+                            local database. Finally, a view in the audit
+                            database was used for transformations and
+                            calculations to be fed into PowerBI and shared with
+                            the organization.
                         </p>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Duis dapibus rutrum facilisis. Class aptent
-                            taciti sociosqu ad litora torquent per conubia
-                            nostra, per inceptos himenaeos. Etiam tristique
-                            libero eu nibh porttitor fermentum. Nullam venenatis
-                            erat id vehicula viverra. Nunc ultrices eros ut
-                            ultricies condimentum. Mauris risus lacus, blandit
-                            sit amet venenatis non, bibendum vitae dolor. Nunc
-                            lorem mauris, fringilla in aliquam at, euismod in
-                            lectus. Pellentesque habitant morbi tristique
-                            senectus et netus et malesuada fames ac turpis
-                            egestas. In non lorem sit amet elit placerat
-                            maximus. Pellentesque aliquam maximus risus, vel sed
-                            vehicula.
+                            The application had to work around limitations,
+                            namely that we did not have engineering support or
+                            an environment to host and schedule the script. In
+                            the end, a single operator orchestrated the loading
+                            and generation of audits through a simple CLI and a
+                            config file was used to make swappable components
+                            (such as creating exemption lists and tracking
+                            changes in the QA agent availability if there were
+                            to be taken off assingment even if temporarily). In
+                            future iterations or an ideal scenario, something
+                            like Airflow would enable scheduled jobs and all the
+                            data would live in a hosted environment rather than
+                            living in local files.
                         </p>
                     </section>
                 </div>
