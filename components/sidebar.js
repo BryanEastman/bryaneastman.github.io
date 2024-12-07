@@ -3,67 +3,19 @@ class Sidebar extends HTMLElement {
     super();
   }
 
-  connectedCallback() {
-    this.innerHTML = `
-      <!-- Sidebar -->
-      <div id="sidebar">
-          <div class="inner">
-              <!-- Menu -->
-              <nav id="menu">
-                  <header class="major">
-                      <h2>Menu</h2>
-                  </header>
-                  <ul>
-                      <li><a href="index.html">Homepage</a></li>
-                      <!-- <li><a href="generic.html">Generic</a></li>
-                      <li><a href="elements.html">Elements</a></li> -->
-                      <li>
-                          <span class="opener">Projects</span>
-                          <ul>
-                              <li>
-                                  <a href="CallAudits.html"
-                                      >Quality Assurance App</a
-                                  >
-                              </li>
-                              <!-- <li><a href="#">Ipsum Adipiscing</a></li>
-                              <li><a href="#">Tempus Magna</a></li>
-                              <li><a href="#">Feugiat Veroeros</a></li> -->
-                          </ul>
-                      </li>
-                  </ul>
-              </nav>
+  async connectedCallback() {
+    try {
+      const response = await fetch("components/sidebar.html");
+      const html = await response.text();
+      this.innerHTML = html;
 
-              <!-- Section -->
-              <section>
-                  <header class="major">
-                      <h2>Get in touch</h2>
-                  </header>
-                  <p>
-                      Looking to connect? I am excited to network with
-                      others in the I/O and People Analytics space, be it
-                      collaborating on projects, providing advice, or just
-                      connecting over coffee!
-                  </p>
-                  <ul class="contact">
-                      <li class="icon solid fa-envelope">
-                          <a href="#">BryanEastman@proton.me</a>
-                      </li>
-                      <li class="icon solid fa-phone">(313) 649-7961</li>
-                      <li class="icon solid fa-home">Detroit, MI</li>
-                  </ul>
-              </section>
-
-              <!-- Footer -->
-              <footer id="footer"></footer>
-          </div>
-      </div>
-  </div>
-      `;
-
-    // Wait for the DOM to be ready
-    setTimeout(() => {
-      this.initializeSidebar();
-    }, 0);
+      // Wait for the DOM to be ready
+      setTimeout(() => {
+        this.initializeSidebar();
+      }, 0);
+    } catch (error) {
+      console.error("Error loading sidebar template:", error);
+    }
   }
 
   initializeSidebar() {
