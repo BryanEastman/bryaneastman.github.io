@@ -39,208 +39,161 @@
                     <!-- Content -->
                     <section>
                         <header class="main">
-                            <h1>Case Study: Call Center QA App</h1>
+                            <h1>Call Audits</h1>
                         </header>
 
                         <span class="image main"
-                            ><img
-                                src="assets/images/CallAudits/DetroitHeader.jpg"
-                                alt=""
+                            ><img src="assets/images/CallAudits/header.jpg" alt=""
                         /></span>
+                    <p>
+    This project is based on work I performed as a Data Analyst working at a
+    high volume call center where there was a drastic need to overhaul the
+    Quality Assurance process. Though the implementation differs slightly, the
+    intent of this project is to showcase core skills used to overcome problems
+    faced by the organization utilizing familiar technologies. The following is
+    a summary with code snippits from this
+    <a href="https://github.com/BryanEastman/CallAuditApp">repo (WIP)</a>.
+</p>
 
-                        <p>
-                            This project is based on work I performed as a Data
-                            Analyst working at a high volume call center where
-                            there was a drastic need to overhaul the Quality
-                            Assurance process. Though the implementation differs
-                            slightly, the intent of this project is to showcase
-                            core skills used to overcome problems faced by the
-                            organization utilizing familiar technologies. The
-                            following is a summary with code snippits from this
-                            <a
-                                href="https://github.com/BryanEastman/CallAuditApp"
-                                >repo (WIP)</a
-                            >.
-                        </p>
+<hr class="major" />
 
-                        <hr class="major" />
+<h2>The Problem</h2>
+<p>
+    At the time, the company was tech-immature and new to even having a
+    dedicated analytics team, spreadsheets and emails served as the core tools
+    underlying most business functions. The call center staffed somewhere around
+    <strong>600 dialers</strong> across <strong>30 teams</strong>, with only
+    <strong>2-3 Quality Assurance agents</strong>
+    responsible for auditing and providing feedback for call volumes in the
+    range of millions per week. A standardized form existed with
+    <strong>pass/fail</strong> categories, where QA would listen to a selection
+    of calls submitted by team leaders and respond via email their findings and
+    follow up with coaching.
+</p>
+<p>The core issues I identified in the process are:</p>
+<ul>
+    <li>Lack of historical data tracking</li>
+    <li>Indefinite/nonstandard procedure for selecting calls</li>
+    <li>Low coverage due to small sample</li>
+</ul>
+<p>
+    In the process of redefining the auditing procedure, I sought to answer
+    these questions for the business which were not being addressed by the
+    existing process:
+</p>
+<ul>
+    <li>Who are our highest and lowest performers?</li>
+    <li>What is the impact of quality on our KPI's?</li>
+    <li>Where are our greatest areas of opportunity?</li>
+    <li>How is call quality changing over time?</li>
+    <li>How confident are we in our accuracy of rating quality?</li>
+</ul>
 
-                        <h2>The Problem</h2>
-                        <p>
-                            At the time, the company was tech-immature and new
-                            to even having a dedicated analytics team,
-                            spreadsheets and emails served as the core tools
-                            underlying most business functions. The call center
-                            staffed somewhere around
-                            <strong>600 dialers</strong> across
-                            <strong>30 teams</strong>, with only
-                            <strong>2-3 Quality Assurance agents</strong>
-                            responsible for auditing and providing feedback for
-                            call volumes in the range of millions per week. A
-                            standardized form existed with
-                            <strong>pass/fail</strong> categories, where QA
-                            would listen to a selection of calls submitted by
-                            team leaders and respond via email their findings
-                            and follow up with coaching.
-                        </p>
-                        <p>The core issues I identified in the process are:</p>
-                        <ul>
-                            <li>Lack of historical data tracking</li>
-                            <li>
-                                Indefinite/nonstandard procedure for selecting
-                                calls
-                            </li>
-                            <li>Low coverage due to small sample</li>
-                        </ul>
-                        <p>
-                            In the process of redefining the auditing procedure,
-                            I sought to answer these questions for the business
-                            which were not being addressed by the existing
-                            process:
-                        </p>
-                        <ul>
-                            <li>Who are our highest and lowest performers?</li>
-                            <li>What is the impact of quality on our KPI's?</li>
-                            <li>
-                                Where are our greatest areas of opportunity?
-                            </li>
-                            <li>How is call quality changing over time?</li>
-                            <li>
-                                How confident are we in our accuracy of rating
-                                quality?
-                            </li>
-                        </ul>
+<hr class="major" />
 
-                        <hr class="major" />
-
-                        <h2>The Solution</h2>
-                        <p>
-                            The core of the new process was to utilize the tools
-                            available to build out an automation which removed
-                            the heavy manual burden of call selection and
-                            tracking with excel files. In the final iteration,
-                            the stack consisted of:
-                        </p>
-                        <ul>
-                            <li>
-                                <strong>MySQL</strong>: Existing enterprise data
-                                warehouse containing production and agent
-                                information
-                            </li>
-                            <li>
-                                <strong>SQLite</strong>: Local database for
-                                writing sample and audit data
-                            </li>
-                            <li>
-                                <strong>Python</strong>: ETL scripts and CLI for
-                                orchestration
-                            </li>
-                            <li>
-                                <strong>PowerAutomate</strong>: Flows to load
-                                data into forms
-                            </li>
-                            <li>
-                                <strong>PowerApps</strong>: Form frontend for
-                                audit completion
-                            </li>
-                            <li>
-                                <strong>PowerBI</strong>: Visualization and
-                                analysis
-                            </li>
-                        </ul>
-                        <p>
-                            The sample repo differs slightly from this
-                            implementation but the core workflow is the same: on
-                            a weekly basis, a balanced random sample based on
-                            business parameters (2 calls that transferred and 2
-                            calls where the client hung up per agent from the
-                            prior week) was selected, a subset of which was
-                            randomly assigned to the QA agents (5 calls of each
-                            call end type for each leader). Both groups, leaders
-                            and QA agents, would then score their assigned calls
-                            based on the existing scorecard categories by a
-                            deadline, after which results were recorded into a
-                            local database. Finally, a view in the audit
-                            database was used for transformations and
-                            calculations to be fed into PowerBI and shared with
-                            the organization.
-                        </p>
-                        <p>
-                            The application had to work around limitations,
-                            namely that we did not have engineering support or
-                            an environment to host and schedule the script. In
-                            the end, a single operator orchestrated the loading
-                            and generation of audits through a simple CLI and a
-                            config file was used to make swappable components
-                            (such as creating exemption lists and tracking
-                            changes in the QA agent availability if there were
-                            to be taken off assingment even if temporarily). In
-                            future iterations or an ideal scenario, something
-                            like Airflow would enable scheduled jobs and all the
-                            data would live in a hosted environment rather than
-                            living in local files.
-                        </p>
-                    </section>
-                </div>
+<h2>The Solution</h2>
+<p>
+    The core of the new process was to utilize the tools available to build out
+    an automation which removed the heavy manual burden of call selection and
+    tracking with excel files. In the final iteration, the stack consisted of:
+</p>
+<ul>
+    <li>
+        <strong>MySQL</strong>: Existing enterprise data warehouse containing
+        production and agent information
+    </li>
+    <li>
+        <strong>SQLite</strong>: Local database for writing sample and audit
+        data
+    </li>
+    <li><strong>Python</strong>: ETL scripts and CLI for orchestration</li>
+    <li><strong>PowerAutomate</strong>: Flows to load data into forms</li>
+    <li><strong>PowerApps</strong>: Form frontend for audit completion</li>
+    <li><strong>PowerBI</strong>: Visualization and analysis</li>
+</ul>
+<p>
+    The sample repo differs slightly from this implementation but the core
+    workflow is the same: on a weekly basis, a balanced random sample based on
+    business parameters (2 calls that transferred and 2 calls where the client
+    hung up per agent from the prior week) was selected, a subset of which was
+    randomly assigned to the QA agents (5 calls of each call end type for each
+    leader). Both groups, leaders and QA agents, would then score their assigned
+    calls based on the existing scorecard categories by a deadline, after which
+    results were recorded into a local database. Finally, a view in the audit
+    database was used for transformations and calculations to be fed into
+    PowerBI and shared with the organization.
+</p>
+<p>
+    The application had to work around limitations, namely that we did not have
+    engineering support or an environment to host and schedule the script. In
+    the end, a single operator orchestrated the loading and generation of audits
+    through a simple CLI and a config file was used to make swappable components
+    (such as creating exemption lists and tracking changes in the QA agent
+    availability if there were to be taken off assingment even if temporarily).
+    In future iterations or an ideal scenario, something like Airflow would
+    enable scheduled jobs and all the data would live in a hosted environment
+    rather than living in local files.
+</p>
+                </section>
             </div>
-
+        </div>
             <!-- Sidebar -->
             <div id="sidebar">
-                <div class="inner">
-                    <!-- Menu -->
-                    <nav id="menu">
-                        <header class="major">
-                            <h2>Menu</h2>
-                        </header>
-                        <ul>
-                            <li><a href="index.html">Homepage</a></li>
-                            <li>
-                                <span class="opener">Projects</span>
-                                <ul>
-                                    <li>
-                                        <a href="CallAudits.html">Quality Assurance App</a>
-                                    </li>
-                                    <li>
-                                        <a href="CoffeeCatalogScraper.html">Web Scraping</a>
-                                    </li>
-                                    <li>
-                                        <a href="AttritionEDA.html"
-                                            >HR Exploratory Analysis</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a href="MultipleLinearRegression.html"
-                                            >Multiple Linear Regression</a
-                                        >
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
+    <div class="inner">
+        <!-- Menu -->
+        <nav id="menu">
+            <header class="major">
+                <h2>Menu</h2>
+            </header>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li>
+                    <span class="opener">Projects</span>
+                    <ul>
+                        
+                        <li>
+                            <a href="AttritionEDA.html">Attrition EDA</a>
+                        </li>
+                        
+                        <li>
+                            <a href="CallAudits.html">Call Audits</a>
+                        </li>
+                        
+                        <li>
+                            <a href="CoffeeCatalogScraper.html">Coffee Catalog Scraper</a>
+                        </li>
+                        
+                        <li>
+                            <a href="MultipleLinearRegression.html">Multiple Linear Regression</a>
+                        </li>
+                        
+                </li>
+            </ul>
+        </nav>
 
-                    <!-- Section -->
-                    <section>
-                        <header class="major">
-                            <h2>Get in touch</h2>
-                        </header>
-                        <p>
-                            Looking to connect? I am excited to network with others in the
-                            I/O and People Analytics space, be it collaborating on projects,
-                            providing advice, or just connecting over coffee!
-                        </p>
-                        <ul class="contact">
-                            <li class="icon solid fa-envelope">
-                                <a href="#">BryanEastman@proton.me</a>
-                            </li>
-                            <li class="icon solid fa-phone">(313) 649-7961</li>
-                            <li class="icon solid fa-home">Detroit, MI</li>
-                        </ul>
-                    </section>
+        <!-- Section -->
+        <section>
+            <header class="major">
+                <h2>Get in touch</h2>
+            </header>
+            <p>
+                Looking to connect? I am excited to network with others in the
+                I/O and People Analytics space, be it collaborating on projects,
+                providing advice, or just connecting over coffee!
+            </p>
+            <ul class="contact">
+                <li class="icon solid fa-envelope">
+                    <a href="#">BryanEastman@proton.me</a>
+                </li>
+                <li class="icon solid fa-phone">(313) 649-7961</li>
+                <li class="icon solid fa-home">Detroit, MI</li>
+            </ul>
+        </section>
 
-                    <!-- Footer -->
-                    <footer id="footer"></footer>
-                </div>
-            </div>
+        <!-- Footer -->
+        <footer id="footer"></footer>
+    </div>
+</div>
 
         <!-- Scripts -->
         <script src="assets/js/jquery.min.js"></script>
